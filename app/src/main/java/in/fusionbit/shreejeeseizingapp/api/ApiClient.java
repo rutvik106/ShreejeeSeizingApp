@@ -3,6 +3,8 @@ package in.fusionbit.shreejeeseizingapp.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import in.fusionbit.shreejeeseizingapp.Constants;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -11,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static Retrofit retrofit=null;
+    private static Retrofit retrofit = null;
 
     static Retrofit getClient() {
         if (retrofit == null) {
@@ -23,6 +25,9 @@ public class ApiClient {
             //Create OkHttp Client
             OkHttpClient httpClient = new OkHttpClient.Builder()
                     //Set Logging interceptor
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .writeTimeout(60, TimeUnit.SECONDS)
                     .addInterceptor(loggingInterceptor)
                     .build();
 

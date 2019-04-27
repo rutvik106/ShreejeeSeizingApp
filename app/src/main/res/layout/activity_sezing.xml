@@ -76,6 +76,8 @@
                 android:id="@+id/et_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="Date"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,6 +112,21 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout9"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Remarks"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
 
@@ -130,6 +147,8 @@
                     android:id="@+id/et_rcUploaded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="RC Uploaded"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -166,6 +185,8 @@
                     android:id="@+id/et_bikePicUploaded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="Bike Pic Uploaded"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
