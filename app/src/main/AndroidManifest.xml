@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".GeneratedReportActivity"></activity>
-        <activity android:name=".ViewImageActivity" />
+        <activity
+            android:name=".ViewImageActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ReportsActivity" />
         <activity android:name=".SeizingActivity" />
         <activity android:name=".HomeActivity" />

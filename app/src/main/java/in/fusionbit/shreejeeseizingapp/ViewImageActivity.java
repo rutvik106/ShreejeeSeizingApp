@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,8 +33,11 @@ public class ViewImageActivity extends BaseActivity {
         imageName = getIntent().getStringExtra("image_name");
 
         if (imageName == null) {
+            Toast.makeText(this, "Image not found", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+        Toast.makeText(this, imageName, Toast.LENGTH_SHORT).show();
 
         showProgressDialog("Loading Image", "Please Wait...");
 
