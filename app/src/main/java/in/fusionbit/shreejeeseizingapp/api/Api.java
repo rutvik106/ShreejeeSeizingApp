@@ -1,8 +1,11 @@
 package in.fusionbit.shreejeeseizingapp.api;
 
+import java.util.ArrayList;
+
 import in.fusionbit.shreejeeseizingapp.App;
 import in.fusionbit.shreejeeseizingapp.apimodels.FormResponse;
 import in.fusionbit.shreejeeseizingapp.apimodels.ImageResponse;
+import in.fusionbit.shreejeeseizingapp.apimodels.Report;
 import in.fusionbit.shreejeeseizingapp.apimodels.UserModel;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -44,6 +47,15 @@ public class Api {
                     sessionId,
                     vehicleAcNo, customerName, vehicleModel, seizingDate, seizerName, vehicleLocation,
                     remarks, rcBookImage, vehicleImage);
+            call.enqueue(callback);
+            return call;
+        }
+
+        public static Call<ArrayList<Report>> generateReport(String sessionId,
+                                                  String fromDate,
+                                                  String toDate,
+                                                  final Callback<ArrayList<Report>> callback) {
+            Call<ArrayList<Report>> call = user.generateReport("seizing_report", fromDate, toDate, sessionId);
             call.enqueue(callback);
             return call;
         }

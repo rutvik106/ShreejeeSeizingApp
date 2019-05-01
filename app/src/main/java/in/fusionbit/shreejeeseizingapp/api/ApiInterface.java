@@ -1,9 +1,11 @@
 package in.fusionbit.shreejeeseizingapp.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import in.fusionbit.shreejeeseizingapp.apimodels.FormResponse;
 import in.fusionbit.shreejeeseizingapp.apimodels.ImageResponse;
+import in.fusionbit.shreejeeseizingapp.apimodels.Report;
 import in.fusionbit.shreejeeseizingapp.apimodels.UserModel;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -43,6 +45,14 @@ public interface ApiInterface {
                                              @Field("remarks") String remarks,
                                              @Field("rc_book_image") String rcBookImage,
                                              @Field("vehicle_image") String vehicleImage);
+
+        //seizing_report
+        @FormUrlEncoded
+        @POST("webservice/webservice.php")
+        Call<ArrayList<Report>> generateReport(@Field("method") String method,
+                                              @Field("from") String fromDate,
+                                              @Field("to") String toDate,
+                                              @Field("session_id") String sessionId);
 
     }
 

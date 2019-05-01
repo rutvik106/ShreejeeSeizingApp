@@ -99,9 +99,6 @@ public class SeizingActivity extends BaseActivity {
 
     private void setupDatePickerListeners() {
 
-        etDate.setFocusable(false);
-        etDate.setFocusableInTouchMode(false);
-
         etDate.setText(formDate.get(Calendar.DAY_OF_MONTH) + "/" + (formDate.get(Calendar.MONTH) + 1) + "/" +
                 formDate.get(Calendar.YEAR));
 

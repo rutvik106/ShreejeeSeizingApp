@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="VD No: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_vdNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Model: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Customer Name: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_customerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Date: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Sizer Name: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sizerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Vehicle Location: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_vehicleLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Remarks: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="RC Book Image: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_rcBookImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Vehicle Image: "
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_vehicleImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jeet Patel"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
