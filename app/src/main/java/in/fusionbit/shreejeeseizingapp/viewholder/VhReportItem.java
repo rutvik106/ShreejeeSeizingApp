@@ -61,6 +61,7 @@ public class VhReportItem extends RecyclerView.ViewHolder {
         view.tvCustomerName.setText(view.model.getCustomer_name());
         view.tvDate.setText(view.model.getSeizing_date());
         view.tvSizerName.setText(view.model.getSeizer_name());
+        view.tvRemarks.setText(view.model.getRemarks());
         view.tvVehicleLocation.setText(view.model.getVehicle_location());
         view.tvRcBookImage.setText("View Image");
         view.tvVehicleImage.setText("View Image");
