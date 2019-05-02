@@ -21,8 +21,12 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 LoginActivity.start(SplashActivity.this);
             }
-        }, 2000);
+        }, 1500);
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }
