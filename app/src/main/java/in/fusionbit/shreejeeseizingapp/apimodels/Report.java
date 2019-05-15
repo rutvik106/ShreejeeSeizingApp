@@ -30,6 +30,8 @@ public class Report {
     private String remarks;
     private String rc_book_image;
     private String vehicle_image;
+    private String rc_book_image_2;
+    private String vehicle_image_2;
     private String created_by;
     private String last_updated_by;
     private String date_added;
@@ -145,5 +147,22 @@ public class Report {
 
     public void setDate_modified(String date_modified) {
         this.date_modified = date_modified;
+    }
+
+
+    public String getRc_book_image_2() {
+        return rc_book_image_2;
+    }
+
+    public void setRc_book_image_2(String rc_book_image_2) {
+        this.rc_book_image_2 = rc_book_image_2;
+    }
+
+    public String getVehicle_image_2() {
+        return vehicle_image_2;
+    }
+
+    public void setVehicle_image_2(String vehicle_image_2) {
+        this.vehicle_image_2 = vehicle_image_2;
     }
 }

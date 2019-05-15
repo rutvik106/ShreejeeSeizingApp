@@ -36,6 +36,10 @@ public class VhReportItem extends RecyclerView.ViewHolder {
     AppCompatTextView tvRcBookImage;
     @BindView(R.id.tv_vehicleImage)
     AppCompatTextView tvVehicleImage;
+    @BindView(R.id.tv_rcBookImage2)
+    AppCompatTextView tvRcBookImage2;
+    @BindView(R.id.tv_vehicleImage2)
+    AppCompatTextView tvVehicleImage2;
 
     private Report model;
 
@@ -65,6 +69,8 @@ public class VhReportItem extends RecyclerView.ViewHolder {
         view.tvVehicleLocation.setText(view.model.getVehicle_location());
         view.tvRcBookImage.setText("View Image");
         view.tvVehicleImage.setText("View Image");
+        view.tvRcBookImage2.setText("View Image");
+        view.tvVehicleImage2.setText("View Image");
     }
 
     @OnClick(R.id.tv_rcBookImage)
@@ -75,5 +81,15 @@ public class VhReportItem extends RecyclerView.ViewHolder {
     @OnClick(R.id.tv_vehicleImage)
     public void onTvVehicleImageClicked() {
         ViewImageActivity.start(context, model.getVehicle_image());
+    }
+
+    @OnClick(R.id.tv_rcBookImage2)
+    public void onTvRcBookImage2Clicked() {
+        ViewImageActivity.start(context, model.getRc_book_image_2());
+    }
+
+    @OnClick(R.id.tv_vehicleImage2)
+    public void onTvVehicleImage2Clicked() {
+        ViewImageActivity.start(context, model.getVehicle_image_2());
     }
 }

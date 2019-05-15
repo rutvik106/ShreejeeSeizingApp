@@ -44,7 +44,9 @@ public interface ApiInterface {
                                              @Field("vehicle_location") String vehicleLocation,
                                              @Field("remarks") String remarks,
                                              @Field("rc_book_image") String rcBookImage,
-                                             @Field("vehicle_image") String vehicleImage);
+                                             @Field("vehicle_image") String vehicleImage,
+                                             @Field("rc_book_image_2") String rcBookImage2,
+                                             @Field("vehicle_image_2") String vehicleImage2);
 
         //seizing_report
         @FormUrlEncoded

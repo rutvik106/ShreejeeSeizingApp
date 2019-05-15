@@ -42,11 +42,13 @@ public class Api {
                                                            String remarks,
                                                            String rcBookImage,
                                                            String vehicleImage,
+                                                           String rcBookImage2,
+                                                           String vehicleImage2,
                                                            final Callback<FormResponse> callback) {
             Call<FormResponse> call = user.submitSeizingForm("insert_seizing_details",
                     sessionId,
                     vehicleAcNo, customerName, vehicleModel, seizingDate, seizerName, vehicleLocation,
-                    remarks, rcBookImage, vehicleImage);
+                    remarks, rcBookImage, vehicleImage,rcBookImage2,vehicleImage2);
             call.enqueue(callback);
             return call;
         }

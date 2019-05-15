@@ -21,7 +21,6 @@ import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +39,6 @@ import in.fusionbit.shreejeeseizingapp.apimodels.ImageResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,13 +68,26 @@ public class SeizingActivity extends BaseActivity {
     AppCompatImageButton ibUploadRc;
     @BindView(R.id.ib_uploadBikePic)
     AppCompatImageButton ibUploadBikePic;
-    private Boolean isBikePicSelected = false;
+    @BindView(R.id.et_rcUploaded2)
+    TextInputEditText etRcUploaded2;
+    @BindView(R.id.ib_uploadRc2)
+    AppCompatImageButton ibUploadRc2;
+    @BindView(R.id.et_bikePicUploaded2)
+    TextInputEditText etBikePicUploaded2;
+    @BindView(R.id.ib_uploadBikePic2)
+    AppCompatImageButton ibUploadBikePic2;
+
     private Call<ImageResponse> uploadRcImage;
     private Call<ImageResponse> uploadVehicleImage;
+    private Call<ImageResponse> uploadRcImage2;
+    private Call<ImageResponse> uploadVehicleImage2;
+
+
     private Call<FormResponse> formUploadCall;
 
     private Calendar formDate = Calendar.getInstance();
     private DatePickerDialog datePickerFormDate;
+    private int selectedPic = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +105,109 @@ public class SeizingActivity extends BaseActivity {
 
         setupDatePickerListeners();
 
+        setupBikePicUploadListeners2();
 
+        setupRcBookPicUploadListeners2();
+
+
+    }
+
+    private void setupRcBookPicUploadListeners2() {
+        etRcUploaded2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean inFocus) {
+                if (inFocus) {
+                    final String image = etRcUploaded2.getText().toString();
+                    if (image.contains("jpg")) {
+                        ViewImageActivity.start(SeizingActivity.this, image);
+                    } else if (image.isEmpty()) {
+                        openRcBookImagePicker2();
+                    } else {
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                        Toast.makeText(SeizingActivity.this, "Image not uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        etRcUploaded2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String image = etRcUploaded2.getText().toString();
+                if (image.contains("jpg")) {
+                    ViewImageActivity.start(SeizingActivity.this, image);
+                } else if (image.isEmpty()) {
+                    openRcBookImagePicker2();
+                } else {
+                    Toast.makeText(SeizingActivity.this, "Image not uploaded", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void openRcBookImagePicker2() {
+        selectedPic = 4;
+        ImagePicker.create(this)
+                .imageDirectory("shreejeeseizingapp")
+                .single()
+                .start();
+    }
+
+    private void openBikeImagePicker2() {
+        selectedPic = 3;
+        ImagePicker.create(this)
+                .imageDirectory("shreejeeseizingapp")
+                .single()
+                .start();
+    }
+
+    private void openBikeImagePicker() {
+        selectedPic = 1;
+        ImagePicker.create(this)
+                .imageDirectory("shreejeeseizingapp")
+                .single()
+                .start();
+    }
+
+    private void openRcBookImagePicker() {
+        selectedPic = 2;
+        ImagePicker.create(this)
+                .imageDirectory("shreejeeseizingapp")
+                .single()
+                .start();
+    }
+
+    private void setupBikePicUploadListeners2() {
+        etBikePicUploaded2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean inFocus) {
+                if (inFocus) {
+                    final String image = etBikePicUploaded2.getText().toString();
+                    if (image.contains("jpg")) {
+                        ViewImageActivity.start(SeizingActivity.this, image);
+                    } else if (image.isEmpty()) {
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                        openBikeImagePicker2();
+                    } else {
+                        Toast.makeText(SeizingActivity.this, "Image not uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        etBikePicUploaded2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String image = etBikePicUploaded2.getText().toString();
+                if (image.contains("jpg")) {
+                    ViewImageActivity.start(SeizingActivity.this, image);
+                } else if (image.isEmpty()) {
+                    openBikeImagePicker2();
+                } else {
+                    Toast.makeText(SeizingActivity.this, "Image not uploaded", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void setupDatePickerListeners() {
@@ -244,10 +357,19 @@ public class SeizingActivity extends BaseActivity {
             // or get a single image only
             Image image = ImagePicker.getFirstImageOrNull(data);
 
-            if (isBikePicSelected) {
-                uploadBikePic(image.getPath());
-            } else {
-                uploadRcBookPic(image.getPath());
+            switch (selectedPic) {
+                case 1:
+                    uploadBikePic(image.getPath());
+                    break;
+                case 2:
+                    uploadRcBookPic(image.getPath());
+                    break;
+                case 3:
+                    uploadBikePic2(image.getPath());
+                    break;
+                case 4:
+                    uploadRcBookPic2(image.getPath());
+                    break;
             }
 
         }
@@ -257,50 +379,8 @@ public class SeizingActivity extends BaseActivity {
     private void uploadRcBookPic(final String path) {
         etRcUploaded.setText("Uploading...");
 
-        File file = new File(path);
-
-        FileInputStream fis = null;
-        File compressedFile = null;
-        try {
-            fis = new FileInputStream(file);
-
-            if (fis != null) {
-                Bitmap original = BitmapFactory.decodeStream(fis);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                original.compress(Bitmap.CompressFormat.JPEG, 40, out);
-
-                compressedFile = new File(SeizingActivity.this.getCacheDir(), "image_compressed");
-                compressedFile.createNewFile();
-
-                //Convert bitmap to byte array
-                byte[] bitmapdata = out.toByteArray();
-
-                //write the bytes in file
-                FileOutputStream fos = new FileOutputStream(compressedFile);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (compressedFile != null) {
-            Toast.makeText(this, "File was compressed", Toast.LENGTH_SHORT).show();
-        }
-
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("image/jpeg"), compressedFile != null ? compressedFile : file);
-
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("seizing_image", file.getName(), requestFile);
-
         cancelRcUploading();
-        uploadRcImage = Api.User.uploadImage(body, new Callback<ImageResponse>() {
+        uploadRcImage = compressImageAndUpload(path, new Callback<ImageResponse>() {
             @Override
             public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
                 if (response.isSuccessful()) {
@@ -333,62 +413,48 @@ public class SeizingActivity extends BaseActivity {
 
     }
 
-    private void cancelRcUploading() {
-        if (uploadRcImage != null) {
-            if (!uploadRcImage.isCanceled()) {
-                uploadRcImage.cancel();
+    private void uploadRcBookPic2(String path) {
+        etRcUploaded2.setText("Uploading...");
+
+        cancelRcUploading2();
+        uploadRcImage2 = compressImageAndUpload(path, new Callback<ImageResponse>() {
+            @Override
+            public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
+                if (response.isSuccessful()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            etRcUploaded2.setText(response.body().getImage_name());
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            etRcUploaded2.setText("(" + response.code() + ") " + response.message());
+                        }
+                    });
+                }
             }
-            uploadRcImage = null;
-        }
+
+            @Override
+            public void onFailure(Call<ImageResponse> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        etRcUploaded2.setText(t.getMessage());
+                    }
+                });
+            }
+        });
     }
 
     private void uploadBikePic(final String path) {
         etBikePicUploaded.setText("Uploading...");
 
-        File file = new File(path);
-
-        FileInputStream fis = null;
-        File compressedFile = null;
-        try {
-            fis = new FileInputStream(file);
-
-            if (fis != null) {
-                Bitmap original = BitmapFactory.decodeStream(fis);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                original.compress(Bitmap.CompressFormat.JPEG, 40, out);
-
-                compressedFile = new File(SeizingActivity.this.getCacheDir(), "image_compressed");
-                compressedFile.createNewFile();
-
-                //Convert bitmap to byte array
-                byte[] bitmapdata = out.toByteArray();
-
-                //write the bytes in file
-                FileOutputStream fos = new FileOutputStream(compressedFile);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (compressedFile != null) {
-            Toast.makeText(this, "File was compressed", Toast.LENGTH_SHORT).show();
-        }
-
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("image/jpeg"), compressedFile != null ? compressedFile : file);
-
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("seizing_image", file.getName(), requestFile);
-
         cancelVehicleImageUpload();
-        uploadVehicleImage = Api.User.uploadImage(body, new Callback<ImageResponse>() {
+
+        uploadVehicleImage = compressImageAndUpload(path, new Callback<ImageResponse>() {
             @Override
             public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
                 if (response.isSuccessful()) {
@@ -421,12 +487,78 @@ public class SeizingActivity extends BaseActivity {
 
     }
 
+    private void uploadBikePic2(String path) {
+        etBikePicUploaded2.setText("Uploading...");
+
+        cancelVehicleImageUpload2();
+
+        uploadVehicleImage2 = compressImageAndUpload(path, new Callback<ImageResponse>() {
+            @Override
+            public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
+                if (response.isSuccessful()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            etBikePicUploaded2.setText(response.body().getImage_name());
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            etBikePicUploaded2.setText("(" + response.code() + ") " + response.message());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ImageResponse> call, Throwable t) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        etBikePicUploaded2.setText(t.getMessage());
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    private void cancelRcUploading() {
+        if (uploadRcImage != null) {
+            if (!uploadRcImage.isCanceled()) {
+                uploadRcImage.cancel();
+            }
+            uploadRcImage = null;
+        }
+    }
+
+    private void cancelRcUploading2() {
+        if (uploadRcImage2 != null) {
+            if (!uploadRcImage2.isCanceled()) {
+                uploadRcImage2.cancel();
+            }
+            uploadRcImage2 = null;
+        }
+    }
+
     private void cancelVehicleImageUpload() {
         if (uploadVehicleImage != null) {
             if (!uploadVehicleImage.isCanceled()) {
                 uploadVehicleImage.cancel();
             }
             uploadVehicleImage = null;
+        }
+    }
+
+    private void cancelVehicleImageUpload2() {
+        if (uploadVehicleImage2 != null) {
+            if (!uploadVehicleImage2.isCanceled()) {
+                uploadVehicleImage2.cancel();
+            }
+            uploadVehicleImage2 = null;
         }
     }
 
@@ -440,22 +572,6 @@ public class SeizingActivity extends BaseActivity {
                 openBikeImagePicker();
                 break;
         }
-    }
-
-    private void openBikeImagePicker() {
-        isBikePicSelected = true;
-        ImagePicker.create(this)
-                .imageDirectory("shreejeeseizingapp")
-                .single()
-                .start();
-    }
-
-    private void openRcBookImagePicker() {
-        isBikePicSelected = false;
-        ImagePicker.create(this)
-                .imageDirectory("shreejeeseizingapp")
-                .single()
-                .start();
     }
 
     @OnClick(R.id.btn_submit)
@@ -537,6 +653,8 @@ public class SeizingActivity extends BaseActivity {
                 etRemarks.getText().toString(),
                 etRcUploaded.getText().toString(),
                 etBikePicUploaded.getText().toString(),
+                etRcUploaded2.getText().toString(),
+                etBikePicUploaded2.getText().toString(),
                 new Callback<FormResponse>() {
                     @Override
                     public void onResponse(Call<FormResponse> call, Response<FormResponse> response) {
@@ -589,6 +707,8 @@ public class SeizingActivity extends BaseActivity {
         etRcUploaded.setText("");
         etBikePicUploaded.setText("");
         etRemarks.setText("");
+        etRcUploaded2.setText("");
+        etBikePicUploaded2.setText("");
     }
 
     private void cancelFormUploadCall() {
@@ -600,5 +720,62 @@ public class SeizingActivity extends BaseActivity {
             formUploadCall = null;
         }
 
+    }
+
+    @OnClick(R.id.ib_uploadRc2)
+    public void onIbUploadRc2Clicked() {
+        openRcBookImagePicker2();
+    }
+
+    @OnClick(R.id.ib_uploadBikePic2)
+    public void onIbUploadBikePic2Clicked() {
+        openBikeImagePicker2();
+    }
+
+    private Call<ImageResponse> compressImageAndUpload(String path, Callback<ImageResponse> callback) {
+        File file = new File(path);
+
+        FileInputStream fis = null;
+        File compressedFile = null;
+        try {
+            fis = new FileInputStream(file);
+
+            if (fis != null) {
+                Bitmap original = BitmapFactory.decodeStream(fis);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                original.compress(Bitmap.CompressFormat.JPEG, 40, out);
+
+                compressedFile = new File(SeizingActivity.this.getCacheDir(), "image_compressed");
+                compressedFile.createNewFile();
+
+                //Convert bitmap to byte array
+                byte[] bitmapdata = out.toByteArray();
+
+                //write the bytes in file
+                FileOutputStream fos = new FileOutputStream(compressedFile);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (compressedFile != null) {
+            Toast.makeText(this, "File was compressed", Toast.LENGTH_SHORT).show();
+        }
+
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("image/jpeg"), compressedFile != null ? compressedFile : file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("seizing_image", file.getName(), requestFile);
+
+
+        return Api.User.uploadImage(body, callback);
     }
 }
